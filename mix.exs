@@ -7,7 +7,10 @@ defmodule Cuid2Ex.MixProject do
       version: "0.1.0",
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description: "CUID2 (Collision-resistant Unique IDentifier) algorithm",
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/marknefedov/cuid2_ex"}
     ]
   end
 
