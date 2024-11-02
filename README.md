@@ -7,8 +7,6 @@ Cuid2Ex is an Elixir implementation of the CUID2 (Collision-resistant Unique IDe
 - Secure, collision-resistant ID generation
 - URL-safe output with no special characters
 - Configurable ID length (default: 24 characters)
-- Customizable random number generator and counter
-- Input validation
 - Zero dependencies (besides Erlang/OTP crypto)
 
 ## Installation
