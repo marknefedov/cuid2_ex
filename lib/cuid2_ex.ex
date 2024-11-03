@@ -56,17 +56,22 @@ defmodule Cuid2Ex do
 
   @doc """
   Creates a hash of the input string using SHA3-512 and converts it to base36.
+  Drops the first character because it will bias the histogram to the left.
   """
   def hash(input \\ "") do
     input
     |> sha3_512()
     |> Integer.to_string(36)
     |> String.downcase()
-    |> String.slice(1..-1//-1)
+    |> String.slice(1..-1//1)
   end
 
+  @spec create_fingerprint(any()) :: binary()
   @doc """
-  Creates a fingerprint for the CUID generator.
+  Creates a fingerprint for the CUID generator using `create_entropy/2` with `@big_length`.
+
+  ## Parameters
+    * `random` - Random number generator function (default: `:rand.uniform/0`)
   """
   def create_fingerprint(random \\ :rand.uniform() / 0) do
     create_entropy(@big_length, random)
@@ -76,6 +81,9 @@ defmodule Cuid2Ex do
 
   @doc """
   Creates a counter function that increments from the given starting count.
+
+  ## Parameters
+    * `count` - Starting count
   """
   def create_counter(count) do
     fn -> count + 1 end

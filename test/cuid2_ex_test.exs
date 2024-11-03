@@ -1,10 +1,13 @@
 defmodule Cuid2ExTest do
+  require Logger
   use ExUnit.Case
 
   test "create/0 generates valid CUID2 strings" do
     id = Cuid2Ex.create()
     assert Cuid2Ex.cuid?(id)
-    assert String.length(id) == 24  # default length
+    # default length
+    assert String.length(id) == 24
+    Logger.debug("Created CUID2: #{id}")
   end
 
   test "init/1 with custom length generates correct length IDs" do
@@ -22,9 +25,13 @@ defmodule Cuid2ExTest do
     assert Cuid2Ex.cuid?("abc123", min_length: 2, max_length: 32)
 
     # Invalid cases
-    refute Cuid2Ex.cuid?("!")  # invalid character
-    refute Cuid2Ex.cuid?("a")  # too short
-    refute Cuid2Ex.cuid?("a" <> String.duplicate("0", 33))  # too long
-    refute Cuid2Ex.cuid?(123)  # non-string input
+    # invalid character
+    refute Cuid2Ex.cuid?("!")
+    # too short
+    refute Cuid2Ex.cuid?("a")
+    # too long
+    refute Cuid2Ex.cuid?("a" <> String.duplicate("0", 33))
+    # non-string input
+    refute Cuid2Ex.cuid?(123)
   end
 end
